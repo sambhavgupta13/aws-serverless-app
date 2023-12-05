@@ -4,15 +4,12 @@ install:
     runtime-versions:
       nodejs: 18
     commands:
-      - >
-       node -v
-      - >
-       npm run install:frontend
-      - >
-       npm run install:server
-  build:
-    commands:
-      - chmod +x ./infrastructure/sam_dls.sh
-      - ./infrastructure/sam_dls.sh build 
-      - ./infrastructure/sam_dls.sh package 
-      - ./infrastructure/sam_dls.sh deploy 
+      - node -v
+      - npm run install:frontend
+      - npm run install:server
+build:
+  commands:
+    - chmod +x ./infrastructure/sam_dls.sh
+    - ./infrastructure/sam_dls.sh build 
+    - ./infrastructure/sam_dls.sh package 
+    - ./infrastructure/sam_dls.sh deploy 
