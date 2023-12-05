@@ -1,15 +1,15 @@
 version: 0.2
 phases:
-install:
-    runtime-versions:
-      nodejs: 18
+  install:
+      runtime-versions:
+        nodejs: 18
+      commands:
+        - node -v
+        - npm run install:frontend
+        - npm run install:server
+  build:
     commands:
-      - node -v
-      - npm run install:frontend
-      - npm run install:server
-build:
-  commands:
-    - chmod +x ./infrastructure/sam_dls.sh
-    - ./infrastructure/sam_dls.sh build 
-    - ./infrastructure/sam_dls.sh package 
-    - ./infrastructure/sam_dls.sh deploy 
+      - chmod +x ./infrastructure/sam_dls.sh
+      - ./infrastructure/sam_dls.sh build 
+      - ./infrastructure/sam_dls.sh package 
+      - ./infrastructure/sam_dls.sh deploy 
