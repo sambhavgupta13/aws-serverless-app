@@ -9,7 +9,7 @@ phases:
         - npm run install:server
   build:
     commands:
-      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo $StageName
       - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh build 
       - ./infrastructure/sam_dls.sh package 
