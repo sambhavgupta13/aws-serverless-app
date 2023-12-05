@@ -5,10 +5,6 @@ FROM --platform=linux/arm64 node:21 as ui-build
 # make the '/usr/src/app' folder the current working directory
 WORKDIR /usr/src/app
 
-# Updating and Upgrading apt-get
-RUN apt-get update
-RUN apt-get -y upgrade
-
 #copy frontend files and folders to '/frontend' folder
 COPY frontend/ ./frontend/
 
