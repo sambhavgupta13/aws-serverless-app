@@ -2,7 +2,7 @@ version: 0.2
 phases:
   build:
     commands:
-      - chmod +x ./infrastructure/appInfra/sam_dls.sh
+      - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh build 
       - ./infrastructure/sam_dls.sh package 
       - ./infrastructure/sam_dls.sh deploy 
