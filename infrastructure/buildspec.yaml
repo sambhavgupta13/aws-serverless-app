@@ -16,7 +16,7 @@ phases:
           echo "Running build-specific commands"
           ./infrastructure/sam_dls.sh build 
           ./infrastructure/sam_dls.sh package
-        elif [ "$CODEBUILD_RESOLVED_SOURCE_VERSION" == "Deploy" ]; then
+        elif [ "$StageName" == "Deploy" ]; then
           echo "Running deploy-specific commands"
           ./infrastructure/sam_dls.sh deploy 
         else
