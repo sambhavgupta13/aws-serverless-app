@@ -67,8 +67,6 @@ Resources:
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
-              OutputArtifacts:
-                - Name: BuildArtifactStageAsZip
               RunOrder: 1
         - Name: Deploy
           Actions:
@@ -82,9 +80,8 @@ Resources:
                 ProjectName: !Ref CodeBuildProject
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: BuildArtifactStageAsZip
-              OutputArtifacts:
-                - Name: DeployArtifactStageAsZip
+                - Name: SourceCodeStageAsZip
+             
               
                   
 

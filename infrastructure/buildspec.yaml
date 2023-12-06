@@ -23,7 +23,3 @@ phases:
           echo "Unknown stage"
           exit 1
         fi
-
-artifacts:
-  files: '**/*'
-  base-directory: 'output'
