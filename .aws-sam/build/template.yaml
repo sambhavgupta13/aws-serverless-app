@@ -1,5 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: CI/CD Pipeline for AWS Serverless App
+Parameters:
+  GithubToken:
+    Default: invalid_token
+    Description: Github OAuth Token with full permissions on admin:repo_hook and repo
+    NoEcho: true
+    Type: String
 Resources:
   CodeBuildProject:
     Type: AWS::CodeBuild::Project
@@ -37,7 +43,8 @@ Resources:
             Version: '1'
           Configuration:
             Branch: main
-            OAuthToken: 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
+            OAuthToken:
+              Ref: GithubToken
             Owner: sambhavgupta13
             Repo: aws-serverless-app
           OutputArtifacts:

@@ -66,9 +66,10 @@ Resources:
                 ProjectName: !Ref CodeBuildProject
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: SourceCodeAsZip
+                - Name: SourceCodeStageAsZip
               OutputArtifacts:
-                - Name: BuildArtifactAsZip
+                - Name: BuildArtifactStageAsZip
+              RunOrder: 1
         - Name: Deploy
           Actions:
             - Name: CodeBuild
