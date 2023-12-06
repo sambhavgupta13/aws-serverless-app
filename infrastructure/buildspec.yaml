@@ -27,7 +27,5 @@ phases:
 artifacts:
   files: 
     - '**/*'
-  type: S3
   name: MyBuildArtifacts
   discard-paths: yes
-  location: 'sambhav-test-cb-artifacts/sambhav-test-codepip'
