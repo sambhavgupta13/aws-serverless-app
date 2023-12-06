@@ -52,7 +52,7 @@ Resources:
                 Owner: sambhavgupta13
                 Repo: aws-serverless-app
               OutputArtifacts:
-                - Name: SourceCodeStage
+                - Name: SourceCodeStageAsZip
               RunOrder: 1
         - Name: Build
           Actions:
@@ -66,9 +66,9 @@ Resources:
                 ProjectName: !Ref CodeBuildProject
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: SourceCodeStage
+                - Name: SourceCodeStageAsZip
               OutputArtifacts:
-                - Name: BuildArtifactStage
+                - Name: BuildArtifactStageAsZip
               RunOrder: 1
         - Name: Deploy
           Actions:
@@ -82,13 +82,9 @@ Resources:
                 ProjectName: !Ref CodeBuildProject
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: BuildArtifactStage
+                - Name: BuildArtifactStageAsZip
               OutputArtifacts:
-                - Name: DeployArtifactStage
+                - Name: DeployArtifactStageAsZip
               
-  Outputs:
-  CodePipelineOutput:
-    Description: Output artifact from the Build stage
-    Value: !Ref Pipeline  
                   
 
