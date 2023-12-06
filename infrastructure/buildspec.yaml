@@ -25,7 +25,8 @@ phases:
         fi
 
 artifacts:
-  file: '**/*'
+  files: 
+    - '**/*'
   type: S3
   name: MyBuildArtifacts
   discard-paths: yes
