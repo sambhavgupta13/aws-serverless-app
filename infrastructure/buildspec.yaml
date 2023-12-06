@@ -9,14 +9,14 @@ phases:
         - npm run install:server
   build:
     commands:
-      - echo $StageName
+      - echo $STAGE_NAME
       - chmod +x ./infrastructure/sam_dls.sh
       - |
-        if [ "$StageName" == "Build" ]; then
+        if [ "$STAGE_NAME" == "BUILD" ]; then
           echo "Running build-specific commands"
           ./infrastructure/sam_dls.sh build 
           ./infrastructure/sam_dls.sh package
-        elif [ "$StageName" == "Deploy" ]; then
+        elif [ "$STAGE_NAME" == "DEPLOY" ]; then
           echo "Running deploy-specific commands"
           ./infrastructure/sam_dls.sh deploy 
         else
