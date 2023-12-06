@@ -23,3 +23,10 @@ phases:
           echo "Unknown stage"
           exit 1
         fi
+
+artifacts:
+  file: '**/*'
+  type: S3
+  name: MyBuildArtifacts
+  discard-paths: yes
+  location: 'sambhav-test-cb-artifacts/sambhav-test-codepip'
