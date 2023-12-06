@@ -52,7 +52,7 @@ Resources:
                 Owner: sambhavgupta13
                 Repo: aws-serverless-app
               OutputArtifacts:
-                - Name: SourceCodeAsZip
+                - Name: SSourceCodeStageAsZip
               RunOrder: 1
         - Name: Build
           Actions:
