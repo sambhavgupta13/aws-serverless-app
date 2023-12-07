@@ -20,6 +20,7 @@ phases:
           fi
   build:
     commands:
+      - ls -a
       - echo $STAGE_NAME
       - chmod +x ./infrastructure/sam_dls.sh
       - |
