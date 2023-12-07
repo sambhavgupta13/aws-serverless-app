@@ -6,6 +6,7 @@ phases:
       commands:
         - echo "Checking if dependencies need to be installed..."
         - |
+          ls -a
           if test -e "/root/.cache/dependencies-installed";then
           echo "dependencies already installed"
           else
