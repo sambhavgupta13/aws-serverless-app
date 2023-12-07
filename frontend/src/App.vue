@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <h1>AWS SERVERLESS APP UPDATED AGAIN</h1>
+   <h1>AWS SERVERLESS APP UPDATED </h1>
    <h2>First Commit</h2>
    <h2>Second Commit</h2>
    <h2>third commit</h2>
