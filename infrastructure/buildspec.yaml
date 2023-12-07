@@ -11,7 +11,7 @@ phases:
           echo "dependencies already installed"
           else
           echo "Dependencies not installed, downloading from S3 cache";
-          aws s3 cp s3://codebuild-artifacts-cache-sambhav/a66db473-1be3-4f3a-9fbd-54fbd53c0b49/ /root/.cache/ --recursive || echo "No cache found, proceeding with installation";
+          aws s3 cp s3://codebuild-artifacts-cache-sambhav/cb696437-0bb8-472a-a8e7-de9390b9ee99/ /root/.cache/ --recursive || echo "No cache found, proceeding with installation";
           echo "Marking dependencies as installed..."
           touch /root/.cache/dependencies-installed
           fi
