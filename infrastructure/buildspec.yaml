@@ -28,6 +28,6 @@ phases:
 
 cache:
   paths:
-    - frontend/node_modules 
-    - server/node_modules 
-  identifier: my-unique-identifier  
+    - frontend/node_modules/**/* 
+    - server/node_modules/**/*
+    - package.json 
