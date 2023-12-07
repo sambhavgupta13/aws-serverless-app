@@ -6,12 +6,12 @@ phases:
       commands:
         - echo "Checking if dependencies need to be installed..."
         - |
-          ls -a
+          ls -la /root/.cache
           if [ -e "/root/.cache/dependencies-installed" ];then
           echo "dependencies already installed"
           else
           echo "Dependencies not installed, downloading from S3 cache";
-          aws s3 cp s3://codebuild-artifacts-cache-sambhav/sambhav/ /root/.cache/ --recursive || echo "No cache found, proceeding with installation";
+          aws s3 cp s3://codebuild-artifacts-cache-sambhav/a66db473-1be3-4f3a-9fbd-54fbd53c0b49/ /root/.cache/ --recursive || echo "No cache found, proceeding with installation";
           echo "Marking dependencies as installed..."
           touch /root/.cache/dependencies-installed
           fi
@@ -21,7 +21,7 @@ phases:
         - npm run install:server
   build:
     commands:
-      - ls -a
+      - ls -la /root/.cache
       - echo $STAGE_NAME
       - chmod +x ./infrastructure/sam_dls.sh
       - |
