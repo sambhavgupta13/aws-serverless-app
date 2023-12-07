@@ -7,17 +7,18 @@ phases:
         - echo "Checking if dependencies need to be installed..."
         - |
           ls -a
-          if test -e "/root/.cache/dependencies-installed";then
+          if [ -e "/root/.cache/dependencies-installed" ];then
           echo "dependencies already installed"
           else
-          echo installing dependencies
-          node -v
-          npm run install:frontend
-          npm run install:server
+          echo "Dependencies not installed, downloading from S3 cache";
+          aws s3 cp s3://codebuild-artifacts-cache-sambhav/sambhav/ /root/.cache/ --recursive || echo "No cache found, proceeding with installation";
           echo "Marking dependencies as installed..."
-          mkdir -p /root/.cache
           touch /root/.cache/dependencies-installed
           fi
+        - echo installing dependencies
+        - node -v
+        - npm run install:frontend
+        - npm run install:server
   build:
     commands:
       - ls -a
