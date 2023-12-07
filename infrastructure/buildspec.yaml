@@ -26,5 +26,5 @@ phases:
 
 cache:
   paths:
-    - /root/.m2/repository
-    - /root/.gradle/caches
+    - /frontend/node_modules
+    - /server/node_modules
