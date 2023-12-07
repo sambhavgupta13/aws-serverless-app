@@ -1,5 +1,5 @@
 #### UI build Stage
-FROM --platform=linux/arm64 node:21 as ui-build
+FROM 189731456380.dkr.ecr.us-east-1.amazonaws.com/base-ecr-repository:latest as ui-build
 
 
 # make the '/usr/src/app' folder the current working directory
@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY frontend/ ./frontend/
 
 #### Server build Stage
-FROM --platform=linux/arm64 node:21 as server-build
+FROM 189731456380.dkr.ecr.us-east-1.amazonaws.com/base-ecr-repository:latest as server-build
 
 
 # make the '/usr/src/app' folder the current working directory
