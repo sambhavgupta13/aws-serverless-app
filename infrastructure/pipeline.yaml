@@ -22,6 +22,9 @@ Resources:
         BuildSpec: infrastructure/buildspec.yaml
       Artifacts:
         Type: CODEPIPELINE
+      Cache:
+        Type: S3
+        Location: 'codebuild-artifacts-cache-sambhav'
       Environment:
         Type: ARM_CONTAINER
         Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0

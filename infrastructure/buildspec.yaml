@@ -4,24 +4,11 @@ phases:
       runtime-versions:
         nodejs: 18
       commands:
-        - echo "Checking if dependencies need to be installed..."
-        - |
-          ls -la /root/.cache
-          if [ -e "/root/.cache/dependencies-installed" ];then
-          echo "dependencies already installed"
-          else
-          echo "Dependencies not installed, downloading from S3 cache";
-          aws s3 cp s3://codebuild-artifacts-cache-sambhav/cb696437-0bb8-472a-a8e7-de9390b9ee99/ /root/.cache/ --recursive
-          echo "Marking dependencies as installed..."
-          touch /root/.cache/dependencies-installed
-          echo installing dependencies
-          node -v
-          npm run install:frontend
-          npm run install:server
-          fi
+        - node -v
+        - npm run install:frontend
+        - npm run install:server
   build:
     commands:
-      - ls -la /root/.cache
       - echo $STAGE_NAME
       - chmod +x ./infrastructure/sam_dls.sh
       - |
@@ -37,12 +24,7 @@ phases:
           exit 1
         fi
 
-artifacts:
-  files: 
-    - '**/*'
-  name: MyBuildArtifacts
-  discard-paths: yes
-
 cache:
   paths:
-    - '/root/.cache'
+    - /root/.m2/repository
+    - /root/.gradle/caches

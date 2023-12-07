@@ -19,6 +19,9 @@ Resources:
         BuildSpec: infrastructure/buildspec.yaml
       Artifacts:
         Type: CODEPIPELINE
+      Cache:
+        Type: S3
+        Location: codebuild-artifacts-cache-sambhav
       Environment:
         Type: ARM_CONTAINER
         Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0
@@ -62,6 +65,8 @@ Resources:
             ProjectName:
               Ref: CodeBuildProject
             EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
+          InputArtifacts:
+          - Name: SourceCodeStageAsZip
           RunOrder: 1
       - Name: Deploy
         Actions:
@@ -75,3 +80,5 @@ Resources:
             ProjectName:
               Ref: CodeBuildProject
             EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"}]'
+          InputArtifacts:
+          - Name: SourceCodeStageAsZip
