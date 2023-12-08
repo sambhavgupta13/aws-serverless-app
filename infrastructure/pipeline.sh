@@ -5,15 +5,7 @@ try() { eval "$@" || die "cannot $*"; }
 stack_parameters="ParameterKey=GithubToken,ParameterValue=$2"
 
 #Run command based on action provided
-case $1 in
-    'validate')
-        svalidate="sam.cmd validate --template-file infrastructure/pipeline.yaml"
-        try $svalidate
-
-        yell "SAM:Building application"
-        sbuild="sam.cmd build --template-file infrastructure/pipeline.yaml"
-        try $sbuild
-        ;;
+case $1 in        
 
     'create')
         yell "Creating CloudFormation Stack"

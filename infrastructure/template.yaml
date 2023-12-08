@@ -1,0 +1,17 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: "App resources"
+
+
+
+Resources:
+ FrontEndS3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: 'static-assets-bucket-sambhav'
+  
+             
+              
+                  
+

@@ -4,7 +4,14 @@ try() { eval "$@" || die "cannot $*"; }
 #Run command based on action provided
 case $1 in
     'build')
-        
+        yell "SAM: Validate template"
+        svalidate="sam.cmd validate --template-file infrastructure/template.yaml"
+        try $svalidate
+
+        yell "SAM:Building application"
+        sbuild="sam.cmd build --template-file infrastructure/template.yaml"
+        try $sbuild
+
         yell "VueJs: Building application"
         vbuild="npm run build --prefix ./frontend/"
         try $vbuild
@@ -30,10 +37,23 @@ case $1 in
         ;;
 
     'deploy')
+
+        yell "Uploading static assets to bucket: 'static-assets-bucket-sambhav'"
+        vdeploy="aws s3 sync ./frontend/dist s3://static-assets-bucket-sambhav --cache-control max-age=31536000"
+        try $vdeploy
+
+        # deploying SAM template
+        yell "SAM: Deploying application"
+        sdeploy="sam.cmd deploy \
+        --region us-east-1 \
+        --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM \
+        --no-fail-on-empty-changeset \
+        --stack-name sambhav-resource-stack"
+        try $sdeploy
     
-        yell "Updating ECS service task with latest image"
-        supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
-        try $supdate
+        # yell "Updating ECS service task with latest image"
+        # supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
+        # try $supdate
         ;;
 
 esac
