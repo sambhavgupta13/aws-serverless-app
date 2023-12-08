@@ -5,11 +5,11 @@ try() { eval "$@" || die "cannot $*"; }
 case $1 in
     'build')
         yell "SAM: Validate template"
-        svalidate="sam.cmd validate --template-file infrastructure/template.yaml"
+        svalidate="sam validate --template-file infrastructure/template.yaml"
         try $svalidate
 
         yell "SAM:Building application"
-        sbuild="sam.cmd build --template-file infrastructure/template.yaml"
+        sbuild="sam build --template-file infrastructure/template.yaml"
         try $sbuild
 
         yell "VueJs: Building application"
@@ -44,7 +44,7 @@ case $1 in
 
         # deploying SAM template
         yell "SAM: Deploying application"
-        sdeploy="sam.cmd deploy \
+        sdeploy="sam deploy \
         --region us-east-1 \
         --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM \
         --no-fail-on-empty-changeset \

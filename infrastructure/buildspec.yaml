@@ -4,8 +4,6 @@ phases:
       runtime-versions:
         nodejs: 18
       commands:
-        - ls -a
-        - ls -R
         - node -v
         - npm run install:frontend
         - npm run install:server
@@ -25,9 +23,3 @@ phases:
           echo "Unknown stage"
           exit 1
         fi
-
-cache:
-  paths:
-    - frontend/node_modules/**/* 
-    - server/node_modules/**/*
-    - package.json 
