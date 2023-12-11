@@ -45,15 +45,17 @@ case $1 in
         # deploying SAM template
         yell "SAM: Deploying application"
         sdeploy="sam deploy \
+        --s3-bucket sam-bucket-sambhav \
+        --s3-prefix sam \
         --region us-east-1 \
         --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM \
         --no-fail-on-empty-changeset \
         --stack-name sambhav-resource-stack"
         try $sdeploy
     
-        yell "Updating ECS service task with latest image"
-        supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
-        try $supdate
+        # yell "Updating ECS service task with latest image"
+        # supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
+        # try $supdate
         ;;
 
 esac

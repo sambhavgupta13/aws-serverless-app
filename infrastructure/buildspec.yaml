@@ -29,4 +29,3 @@ phases:
 cache:
   paths:
     - frontend/dist/**/*
-    - .aws-sam/build/template.yaml
