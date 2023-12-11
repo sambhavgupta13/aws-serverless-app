@@ -29,6 +29,11 @@ Resources:
   Properties:
     BucketName: 'test-bucket-3-sambhav'
   
+ TestBucket4:
+  Type: AWS::S3::Bucket
+  DeletionPolicy: Retain
+  Properties:
+    BucketName: 'test-bucket-4-sambhav'
              
               
                   
