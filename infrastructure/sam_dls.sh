@@ -53,9 +53,9 @@ case $1 in
         --stack-name sambhav-resource-stack"
         try $sdeploy
     
-        # yell "Updating ECS service task with latest image"
-        # supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
-        # try $supdate
+        yell "Updating ECS service task with latest image"
+        supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
+        try $supdate
         ;;
 
 esac
