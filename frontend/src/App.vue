@@ -6,6 +6,7 @@
    <h2>third commit</h2>
    <h3>testing cache commit   1</h3>
    <h3>testing cache commit   2</h3>
+   <h4>testing commit 3</h4>
   </div>
 </template>
 
@@ -24,7 +25,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: greenyellow;
+  color: red;
   margin-top: 60px;
 }
 </style>

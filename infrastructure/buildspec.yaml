@@ -17,6 +17,7 @@ phases:
         if [ "$STAGE_NAME" == "BUILD" ]; then
           echo "Running build-specific commands"
           ./infrastructure/sam_dls.sh build 
+          ./infrastructure/sam_dls.sh package
         elif [ "$STAGE_NAME" == "DEPLOY" ]; then
           echo "Running deploy-specific commands"
           ./infrastructure/sam_dls.sh deploy 
