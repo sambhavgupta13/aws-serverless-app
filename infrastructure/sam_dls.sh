@@ -38,9 +38,9 @@ case $1 in
 
     'deploy')
 
-        yell "Uploading static assets to bucket: 'static-assets-bucket-sambhav'"
-        vdeploy="aws s3 sync ./frontend/dist s3://static-assets-bucket-sambhav --cache-control max-age=31536000"
-        try $vdeploy
+        # yell "Uploading static assets to bucket: 'static-assets-bucket-sambhav'"
+        # vdeploy="aws s3 sync ./frontend/dist s3://static-assets-bucket-sambhav --cache-control max-age=31536000"
+        # try $vdeploy
 
         # deploying SAM template
         yell "SAM: Deploying application"
