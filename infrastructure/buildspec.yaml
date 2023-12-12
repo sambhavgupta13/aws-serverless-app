@@ -30,3 +30,5 @@ cache:
   paths:
     - frontend/dist/**/*
     - .aws-sam/build/template.yaml
+    - frontend/nodemodules/**/*
+    - server/nodemodules/**/*
