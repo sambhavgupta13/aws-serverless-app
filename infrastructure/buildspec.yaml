@@ -6,9 +6,19 @@ phases:
       commands:
         - ls -a
         - ls -R
-        - node -v
-        - npm run install:frontend
-        - npm run install:server
+        - |
+          if [ "$STAGE_NAME" == "BUILD" ]; then
+            echo "installing dependencies"
+            node -v
+            run install:frontend
+            npm run install:server
+          elif [ "$STAGE_NAME" == "DEPLOY" ]; then
+            echo "deploy stage - dont install dependencies .. use from cache"
+          else
+            echo "Unknown stage"
+            exit 1
+          fi 
+         
   build:
     commands:
       - echo $STAGE_NAME
