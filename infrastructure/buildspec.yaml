@@ -4,8 +4,6 @@ phases:
       runtime-versions:
         nodejs: 18
       commands:
-        - ls -a
-        - ls -R
         - |
           if [ "$STAGE_NAME" == "BUILD" ]; then
             echo "installing dependencies"
