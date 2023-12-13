@@ -10,7 +10,7 @@ phases:
           if [ "$STAGE_NAME" == "BUILD" ]; then
             echo "installing dependencies"
             node -v
-            run install:frontend
+            npm run install:frontend
             npm run install:server
           elif [ "$STAGE_NAME" == "DEPLOY" ]; then
             echo "deploy stage - dont install dependencies .. use from cache"
