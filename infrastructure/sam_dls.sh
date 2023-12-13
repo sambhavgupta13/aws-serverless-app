@@ -18,7 +18,7 @@ case $1 in
         ;;
 
     'package')
-        building and pushing docker image to ECR repository
+        # building and pushing docker image to ECR repository
         yell "SAM: Logging into Amazon ECR  Repository"
         slogin="aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 189731456380.dkr.ecr.us-east-1.amazonaws.com"
         try $slogin
