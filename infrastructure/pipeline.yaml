@@ -84,7 +84,9 @@ Resources:
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
-             
+      DisableInboundStageTransitions:
+        - Reason: Manual approval required
+          StageName: Deploy      
               
                   
 
