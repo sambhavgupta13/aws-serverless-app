@@ -1,44 +1,44 @@
 version: 0.2
 phases:
-  install:
-      runtime-versions:
-        nodejs: 18
-      commands:
-        - |
-          if [ "$STAGE_NAME" == "BUILD" ]; then
-            echo "installing dependencies"
-            node -v
-            npm run install:frontend
-            npm run install:server
-          elif [ "$STAGE_NAME" == "DEPLOY" ]; then
-            echo "deploy stage - dont install dependencies .. use from cache"
-          else
-            echo "Unknown stage"
-            exit 1
-          fi 
+  # install:
+  #     runtime-versions:
+  #       nodejs: 18
+  #     commands:
+  #       - |
+  #         if [ "$STAGE_NAME" == "BUILD" ]; then
+  #           echo "installing dependencies"
+  #           node -v
+  #           npm run install:frontend
+  #           npm run install:server
+  #         elif [ "$STAGE_NAME" == "DEPLOY" ]; then
+  #           echo "deploy stage - dont install dependencies .. use from cache"
+  #         else
+  #           echo "Unknown stage"
+  #           exit 1
+  #         fi 
          
-  build:
-    commands:
-      - echo $STAGE_NAME
-      - chmod +x ./infrastructure/sam_dls.sh
-      - |
-        if [ "$STAGE_NAME" == "BUILD" ]; then
-          echo "Running build-specific commands"
-          ./infrastructure/sam_dls.sh build 
-          ./infrastructure/sam_dls.sh package
-        elif [ "$STAGE_NAME" == "DEPLOY" ]; then
-          echo "Running deploy-specific commands"
-          ./infrastructure/sam_dls.sh deploy 
-        else
-          echo "Unknown stage"
-          exit 1
-        fi
+  # build:
+  #   commands:
+  #     - echo $STAGE_NAME
+  #     - chmod +x ./infrastructure/sam_dls.sh
+  #     - |
+  #       if [ "$STAGE_NAME" == "BUILD" ]; then
+  #         echo "Running build-specific commands"
+  #         ./infrastructure/sam_dls.sh build 
+  #         ./infrastructure/sam_dls.sh package
+  #       elif [ "$STAGE_NAME" == "DEPLOY" ]; then
+  #         echo "Running deploy-specific commands"
+  #         ./infrastructure/sam_dls.sh deploy 
+  #       else
+  #         echo "Unknown stage"
+  #         exit 1
+  #       fi
 
   post_build:
     commands:
       - |
         if ["STAGE_NAME == "DEPLOY"];then
-        aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason "completed" 
+          aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason 'completed' 
         else
           exit 1
         fi
