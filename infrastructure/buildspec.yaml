@@ -37,7 +37,7 @@ phases:
   post_build:
     commands:
       - |
-        if ["STAGE_NAME == "DEPLOY"];then
+        if ["$STAGE_NAME" == "DEPLOY"];then
           echo "deploy stage"
           aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason "Completed"
         else
