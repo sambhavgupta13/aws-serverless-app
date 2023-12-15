@@ -53,13 +53,13 @@ case $1 in
         --stack-name sambhav-resource-stack"
         try $sdeploy
     
-        yell "Updating ECS service task with latest image"
-        supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
-        try $supdate
+        # yell "Updating ECS service task with latest image"
+        # supdate="aws ecs update-service --cluster sambhav-test-cluster --service sambhav-test-service --force-new-deployment --region us-east-1"
+        # try $supdate
 
-        yell "Disabling transition between Build and Deploy Stage in Codepipeline"
-        pupdate="aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason "completed" "
-        try $pupdate
+        # yell "Disabling transition between Build and Deploy Stage in Codepipeline"
+        # pupdate="aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason "completed" "
+        # try $pupdate
         ;;
 
 esac
