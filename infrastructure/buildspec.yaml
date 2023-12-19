@@ -41,7 +41,7 @@ phases:
           echo "build stage"
         elif [ "$STAGE_NAME" == "DEPLOY" ]; then
           echo "deploy stage"
-          aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound 
+          aws codepipeline disable-stage-transition --pipeline-name sambhav-test-codepipeline --stage-name Deploy --transition-type Inbound --reason Mannual approval required
         else
           echo "Unknown stage"
           exit 1
