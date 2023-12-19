@@ -81,7 +81,7 @@ Resources:
                 Version: "1"
               Configuration:
                 ProjectName: !Ref CodeBuildProject
-                EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"}]'
+                EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"},{"name":"CODEPIPELINE_NAME","value":"#{codepipeline.Pipeline}","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
       DisableInboundStageTransitions:
