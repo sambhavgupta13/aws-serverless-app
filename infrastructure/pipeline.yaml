@@ -8,6 +8,10 @@ Parameters:
     Description: "Github OAuth Token with full permissions on admin:repo_hook and repo"
     NoEcho: true
     Type: String
+  PipelineProjectName:
+    Default: sambhav-test-codepipeline
+    Description: "Project name for code pipeline"
+    Type: String
 
 Resources:
   CodeBuildProject:
@@ -35,11 +39,16 @@ Resources:
   Pipeline:
     Type: "AWS::CodePipeline::Pipeline"
     Properties:
-      Name: sambhav-test-codepipeline
+      Name: !Ref PipelineProjectName
       RoleArn: arn:aws:iam::189731456380:role/service-role/AWSCodePipelineServiceRole-us-east-1-sambhav-test-pipeline
       ArtifactStore:
         Location: sambhav-test-cb-artifacts
         Type: S3
+      PipelineType: V2
+      Variables:
+        - Name: pipeline-name
+          DefaultValue: !Ref PipelineProjectName
+          Description: some text
       Stages:
         - Name: Source
           Actions:

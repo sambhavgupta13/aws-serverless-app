@@ -42,6 +42,7 @@ phases:
         elif [ "$STAGE_NAME" == "DEPLOY" ]; then
           echo "deploy stage"
           echo "$CODEPIPELINE_NAME"
+          aws codepipeline disable-stage-transition --pipeline-name $CODEPIPELINE_NAME --stage-name Deploy --transition-type Inbound --reason Mannual-approval-required
         else
           echo "Unknown stage"
           exit 1
