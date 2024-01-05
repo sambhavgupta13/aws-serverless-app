@@ -10,4 +10,10 @@ phases:
     commands:
       - echo "$CODEPIPELINE_NAME"
       - aws codepipeline disable-stage-transition --pipeline-name $CODEPIPELINE_NAME --stage-name Deploy --transition-type Inbound --reason Mannual-approval-required
-        
+
+cache:
+  paths:
+    - frontend/dist/**/*
+    - .aws-sam/build/template.yaml
+    - frontend/node_modules/**/*
+    - server/node_modules/**/*     
