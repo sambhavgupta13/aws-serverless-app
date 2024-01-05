@@ -14,16 +14,16 @@ Parameters:
     Type: String
 
 Resources:
-  CodeBuildProject:
+  CodeBuildProjectBuildStage:
     Type: "AWS::CodeBuild::Project"
     Properties:
-      Name: sambhav-test-cb
+      Name: sambhav-test-cb-build-stage
       Description: "AWS serverless App Code Build Project"
       ServiceRole: arn:aws:iam::189731456380:role/service-role/codebuild-sambhav-test-cb-service-role
       TimeoutInMinutes: 20
       Source:
         Type: CODEPIPELINE
-        BuildSpec: infrastructure/buildspec.yaml
+        BuildSpec: infrastructure/buildspec-build.yaml
       Artifacts:
         Type: CODEPIPELINE
       Cache:
@@ -34,7 +34,27 @@ Resources:
         Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0
         PrivilegedMode: true
         ComputeType: BUILD_GENERAL1_SMALL
-        
+
+  CodeBuildProjectDeployStage:
+    Type: "AWS::CodeBuild::Project"
+    Properties:
+      Name: sambhav-test-cb-deploy-stage
+      Description: "AWS serverless App Code Build Project"
+      ServiceRole: arn:aws:iam::189731456380:role/service-role/codebuild-sambhav-test-cb-service-role
+      TimeoutInMinutes: 20
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: infrastructure/buildspec-deploy.yaml
+      Artifacts:
+        Type: CODEPIPELINE
+      Cache:
+        Type: S3
+        Location: 'codebuild-artifacts-cache-sambhav'
+      Environment:
+        Type: ARM_CONTAINER
+        Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0
+        PrivilegedMode: true
+        ComputeType: BUILD_GENERAL1_SMALL
 
   Pipeline:
     Type: "AWS::CodePipeline::Pipeline"
@@ -44,11 +64,6 @@ Resources:
       ArtifactStore:
         Location: sambhav-test-cb-artifacts
         Type: S3
-      PipelineType: V2
-      Variables:
-        - Name: pipeline-name
-          DefaultValue: !Ref PipelineProjectName
-          Description: some text
       Stages:
         - Name: Source
           Actions:
@@ -75,7 +90,7 @@ Resources:
                 Provider: CodeBuild
                 Version: "1"
               Configuration:
-                ProjectName: !Ref CodeBuildProject
+                ProjectName: !Ref CodeBuildProjectBuildStage
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
@@ -89,8 +104,8 @@ Resources:
                 Provider: CodeBuild
                 Version: "1"
               Configuration:
-                ProjectName: !Ref CodeBuildProject
-                EnvironmentVariables: '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"},{"name":"CODEPIPELINE_NAME","value":"#{codepipeline.Pipeline}","type":"PLAINTEXT"}]'
+                ProjectName: !Ref CodeBuildProjectDeployStage
+                EnvironmentVariables: !Sub '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"},{"name":"CODEPIPELINE_NAME","value":"${PipelineProjectName}" ,"type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
       DisableInboundStageTransitions:

@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install:
+      runtime-versions:
+        nodejs: 18
+      commands:
+          - echo "installing dependencies"
+          - node -v
+          - npm run install:frontend
+          - npm run install:server
+          
+         
+  build:
+    commands:
+      - echo $STAGE_NAME
+      - chmod +x ./infrastructure/sam_dls.sh
+      - ./infrastructure/sam_dls.sh build 
+      - ./infrastructure/sam_dls.sh package
+        
+cache:
+  paths:
+    - frontend/dist/**/*
+    - .aws-sam/build/template.yaml
+    - frontend/node_modules/**/*
+    - server/node_modules/**/*

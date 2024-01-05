@@ -13,8 +13,8 @@ case $1 in
         # try $sbuild
 
         yell "VueJs: Building application"
-        # vbuild="npm run build --prefix ./frontend/"
-        # try $vbuild
+        vbuild="npm run build --prefix ./frontend/"
+        try $vbuild
         ;;
 
     'package')
@@ -39,8 +39,8 @@ case $1 in
     'deploy')
 
         yell "Uploading static assets to bucket: 'static-assets-bucket-sambhav'"
-        # vdeploy="aws s3 sync ./frontend/dist s3://static-assets-bucket-sambhav --cache-control max-age=31536000"
-        # try $vdeploy
+        vdeploy="aws s3 sync ./frontend/dist s3://static-assets-bucket-sambhav --cache-control max-age=31536000"
+        try $vdeploy
 
         # deploying SAM template
         yell "SAM: Deploying application"
