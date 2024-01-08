@@ -1,5 +1,7 @@
 version: 0.2
 phases:
+  pre_build:
+    - aws s3 cp s3://codebuild-artifacts-cache-sambhav/frontend/dist ./frontend/dist
   build:
     commands:
       - echo $STAGE_NAME
