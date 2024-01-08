@@ -19,6 +19,3 @@ phases:
       - ls -a
       - ls "frontend/dist"
         
-artifacts:
-  files: '**/*'
-  base-directory: 'frontend/dist'

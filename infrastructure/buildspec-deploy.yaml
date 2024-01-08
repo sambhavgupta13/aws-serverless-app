@@ -1,8 +1,5 @@
 version: 0.2
 phases:
-  pre_build:
-    commands:
-      - aws s3 cp s3://codebuild-artifacts-cache-sambhav/frontend/dist ./frontend/dist
   build:
     commands:
       - echo $STAGE_NAME
@@ -16,9 +13,4 @@ phases:
       - echo "$CODEPIPELINE_NAME"
       - aws codepipeline disable-stage-transition --pipeline-name $CODEPIPELINE_NAME --stage-name Deploy --transition-type Inbound --reason Mannual-approval-required
 
-cache:
-  paths:
-    - frontend/dist
-    - .aws-sam/build/template.yaml
-    - frontend/node_modules/**/*
-    - server/node_modules/**/*     
+   

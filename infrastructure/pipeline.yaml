@@ -94,6 +94,8 @@ Resources:
                 EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
+              OutputArtifacts:
+                - Name: BuildStage
               RunOrder: 1
         - Name: Deploy
           Actions:
@@ -107,7 +109,7 @@ Resources:
                 ProjectName: !Ref CodeBuildProjectDeployStage
                 EnvironmentVariables: !Sub '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"},{"name":"CODEPIPELINE_NAME","value":"${PipelineProjectName}" ,"type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: SourceCodeStageAsZip
+                - Name: BuildStage
       DisableInboundStageTransitions:
         - Reason: Manual approval required
           StageName: Deploy      
