@@ -18,4 +18,7 @@ phases:
       - ./infrastructure/sam_dls.sh 
       - ls -a
       - ls "frontend/dist"
-        
+
+artifacts:
+  files:
+    - 'frontend/dist/**/*'
