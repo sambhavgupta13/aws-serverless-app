@@ -13,7 +13,8 @@ phases:
   build:
     commands:
       - echo $STAGE_NAME
-      - ls
+      - ls -a
+      - ls -R
       - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh build 
       - ./infrastructure/sam_dls.sh package
