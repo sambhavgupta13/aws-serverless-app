@@ -23,3 +23,4 @@ artifacts:
     - 'frontend/dist/**/*'
     - 'infrastructure/buildspec-deploy.yaml'
     - '.aws-sam/**/*'
+    - 'infrastructure/sam_dls.sh'
