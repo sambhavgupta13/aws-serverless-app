@@ -2,7 +2,6 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo $STAGE_NAME
       - ls -a
       - ls "frontend/dist"
       - chmod +x ./infrastructure/sam_dls.sh

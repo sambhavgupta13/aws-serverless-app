@@ -12,10 +12,9 @@ phases:
          
   build:
     commands:
-      - echo $STAGE_NAME
       - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh build 
-      - ./infrastructure/sam_dls.sh 
+      - ./infrastructure/sam_dls.sh package
       - ls -a
       - ls "frontend/dist"
 
