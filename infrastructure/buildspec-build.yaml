@@ -20,4 +20,6 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
+    - 'frontend/dist/**/*'
+    - 'infrastructure/buildspec-deploy.yaml'
+    - '.aws-sam/**/*'
