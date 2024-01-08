@@ -45,6 +45,12 @@ Resources:
   Type: AWS::S3::Bucket
   DeletionPolicy: Retain
   Properties:
-    BucketName: 'test-bucket-6-sambhav'           
+    BucketName: 'test-bucket-6-sambhav'  
+
+ TestBucket7:
+  Type: AWS::S3::Bucket
+  DeletionPolicy: Retain
+  Properties:
+    BucketName: 'test-bucket-7-sambhav'         
                   
 
