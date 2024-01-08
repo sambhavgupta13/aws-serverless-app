@@ -17,7 +17,9 @@ phases:
       - ls "frontend/dist"
       - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh build 
-      - ./infrastructure/sam_dls.sh package
+      - ./infrastructure/sam_dls.sh 
+      - ls -a
+      - ls "frontend/dist"
         
 cache:
   paths:
