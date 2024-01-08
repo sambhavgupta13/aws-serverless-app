@@ -27,4 +27,3 @@ cache:
     - .aws-sam/build/template.yaml
     - frontend/node_modules/**/*
     - server/node_modules/**/*
-  type: NO_ENCRYPTION
