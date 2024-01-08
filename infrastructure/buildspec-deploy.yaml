@@ -4,7 +4,7 @@ phases:
     commands:
       - echo $STAGE_NAME
       - ls -a
-      - ls -R --exclude-dir=node_modules
+      - ls -R | grep -v 'node_modules'
       - chmod +x ./infrastructure/sam_dls.sh
       - ./infrastructure/sam_dls.sh deploy
         
