@@ -26,9 +26,6 @@ Resources:
         BuildSpec: infrastructure/buildspec-build.yaml
       Artifacts:
         Type: CODEPIPELINE
-      Cache:
-        Type: S3
-        Location: 'codebuild-artifacts-cache-sambhav'
       Environment:
         Type: ARM_CONTAINER
         Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0
@@ -47,9 +44,6 @@ Resources:
         BuildSpec: infrastructure/buildspec-deploy.yaml
       Artifacts:
         Type: CODEPIPELINE
-      Cache:
-        Type: S3
-        Location: 'codebuild-artifacts-cache-sambhav'
       Environment:
         Type: ARM_CONTAINER
         Image: aws/codebuild/amazonlinux2-aarch64-standard:3.0
@@ -91,11 +85,10 @@ Resources:
                 Version: "1"
               Configuration:
                 ProjectName: !Ref CodeBuildProjectBuildStage
-                EnvironmentVariables: '[{"name":"STAGE_NAME","value":"BUILD","type":"PLAINTEXT"}]'
               InputArtifacts:
                 - Name: SourceCodeStageAsZip
               OutputArtifacts:
-                - Name: BuildStage
+                - Name: BuildStageAsZip
               RunOrder: 1
         - Name: Deploy
           Actions:
@@ -107,9 +100,9 @@ Resources:
                 Version: "1"
               Configuration:
                 ProjectName: !Ref CodeBuildProjectDeployStage
-                EnvironmentVariables: !Sub '[{"name":"STAGE_NAME","value":"DEPLOY","type":"PLAINTEXT"},{"name":"CODEPIPELINE_NAME","value":"${PipelineProjectName}" ,"type":"PLAINTEXT"}]'
+                EnvironmentVariables: !Sub '[{"name":"CODEPIPELINE_NAME","value":"${PipelineProjectName}" ,"type":"PLAINTEXT"}]'
               InputArtifacts:
-                - Name: BuildStage
+                - Name: BuildStageAsZip
       DisableInboundStageTransitions:
         - Reason: Manual approval required
           StageName: Deploy      
