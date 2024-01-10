@@ -3,11 +3,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: "CI/CD Pipeline for AWS Serverless App"
 
 Parameters:
-  GithubToken:
-    Default: invalid_token
-    Description: "Github OAuth Token with full permissions on admin:repo_hook and repo"
-    NoEcho: true
-    Type: String
   PipelineProjectName:
     Default: sambhav-test-codepipeline
     Description: "Project name for code pipeline"
@@ -50,6 +45,13 @@ Resources:
         PrivilegedMode: true
         ComputeType: BUILD_GENERAL1_SMALL
 
+  CodeStarConnection:  
+    Type: AWS::CodeStarConnections::Connection
+    Properties:
+      ConnectionName: "sambhav-test-connection-2"
+      ProviderType: GitHub
+
+
   Pipeline:
     Type: "AWS::CodePipeline::Pipeline"
     Properties:
@@ -64,14 +66,14 @@ Resources:
             - Name: SourceCodeRepo
               ActionTypeId:
                 Category: Source
-                Owner: ThirdParty
-                Provider: GitHub
+                Owner: AWS
+                Provider: CodeStarSourceConnection
                 Version: "1"
               Configuration:
-                Branch: main
-                OAuthToken: !Ref GithubToken
-                Owner: sambhavgupta13
-                Repo: aws-serverless-app
+                ConnectionArn: !Ref CodeStarConnection
+                FullRepositoryId: sambhavgupta13/aws-serverless-app
+                BranchName: main
+                DetectChanges: true
               OutputArtifacts:
                 - Name: SourceCodeStageAsZip
               RunOrder: 1
@@ -107,5 +109,11 @@ Resources:
         - Reason: Manual approval required
           StageName: Deploy      
               
-                  
-
+             
+Outputs:
+  CodePipeline:
+    Description: "AWS CodePipeline pipeline name"
+    Value: !Ref Pipeline
+  CodeStarConnectionArn:
+    Description: "codestarconnection arn"
+    Value: !GetAtt CodeStarConnection.ConnectionArn

@@ -2,7 +2,6 @@ yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
 try() { eval "$@" || die "cannot $*"; }
 
-stack_parameters="ParameterKey=GithubToken,ParameterValue=$2"
 
 #Run command based on action provided
 case $1 in        
@@ -14,7 +13,6 @@ case $1 in
           --capabilities CAPABILITY_IAM \
           --stack-name pipeline-cf-stack \
           --region us-east-1 \
-          --parameters $stack_parameters \
           --template-body file://infrastructure/pipeline.yaml
         ;;
 
