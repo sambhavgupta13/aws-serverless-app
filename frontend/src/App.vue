@@ -10,7 +10,7 @@
    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, commodi aliquam dolor incidunt tenetur natus laboriosam, tempora excepturi consequatur temporibus deleniti sit quis a beatae repudiandae voluptatem vero? Repellat, a.</p>
   <h2>Test Commit</h2>
   <h2>New Feature added</h2>
-  <h1>Test Commit   </h1>
+  <h1>Test Commit     </h1>
   </div>
 </template>
 
